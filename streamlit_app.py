@@ -1,6 +1,4 @@
-好的,去除`products.csv`文件的依赖是一个比较好的想法。这样可以简化环境配置,更容易实现一个可直接运行的版本。
-这里是去除CSV文件的代码版本:
-python
+
 import streamlit as st
 
 # 定义定价计算函数    
