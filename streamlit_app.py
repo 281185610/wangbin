@@ -37,6 +37,7 @@ st.title('Ozon定价与利润计算工具')
 
 with st.form(key='my_form'):
     col1, col2 = st.columns(2)
+    
     with col1:
         ...
         purchase_margin = st.number_input('采购成本利润率%', value=20) 
@@ -53,5 +54,5 @@ with st.form(key='my_form'):
                                      fixed_fee, exchange_rate,  
                                      promotion_discount,category_commission,
                                      exchange_loss, goods_loss)
-        st.write(f'公司最终定价: ¥{price}')  
-        st.write(f'公司利润: ¥{profit}')
+        st.write(f'最终定价: ¥{price}')  
+        st.write(f'利润: ¥{profit}')
