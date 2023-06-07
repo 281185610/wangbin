@@ -33,7 +33,8 @@ with st.form(key='product_form'):
                price, profit = ozon_pricing(product)
                product['价格'] = price
                product['利润'] = profit
-               product['product_name'] = product_name                results.append(product)
+               product['product_name'] = product_name)  
+           results.append(product)
      
           st.write('定价与利润计算结果:')
           st.table(pd.DataFrame(results))
