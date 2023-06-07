@@ -3,18 +3,18 @@ import pandas as pd
 
 
 def ozon_pricing(params):
-	...  # 参数和函数定义 (与上面代码相同)  
+	...  # 参数和函数定义 (与上面代码相同)
 
 
-# Streamlit实现可视化界面   
+# Streamlit实现可视化界面
 st.title('Ozon定价计算工具')
 
-products = {...}  # 产品参数定义 (与上面代码相同)  
+products = {...}  # 产品参数定义 (与上面代码相同)
 
 with st.form(key='product_form'):
 	cols = st.columns(2)
 	data = []
-for product_name, product_params in products.items()::
+for product_name, product_params in products.items():
 with cols[0]:
 	st.write(f'{product_name}定价计算公式:')
 	formula = f'# 价格 = 采购成本 x (1+{product_params["采购成本利润率"]}%'
