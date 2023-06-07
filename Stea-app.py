@@ -12,7 +12,7 @@ products = {...}  # 产品参数定义 (与上面代码相同)
 with st.form(key='product_form'): 
     cols = st.columns(2)
     data = []
-    for product_name, product_params in products.items():
+  for product_name, product_params in products.items():: 
         with cols[0]:        
             st.write(f'{product_name}定价计算公式:')       
             formula = f'# 价格 = 采购成本 x (1+{product_params["采购成本利润率"]}%' 
