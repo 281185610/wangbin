@@ -1,40 +1,59 @@
-
+python
 import streamlit as st
-import pandas as pd
 
+def ozon_pricing(
+    purchase_cost,
+    purchase_margin,
+    profit_margin, 
+    logistics_fee,
+    other_fee, 
+    fixed_fee,
+    exchange_rate, 
+    promotion_discount,
+    category_commission,
+    exchange_loss, 
+    goods_loss 
+):
+    # 采购成本加成计算
+    cost_plus = purchase_cost * (1 + purchase_margin/100)  
+    
+    # 利润计算
+    profit = cost_plus * profit_margin/100  
+    
+    # 其他费用计算
+    total_cost = cost_plus + profit + logistics_fee + other_fee + fixed_fee  
 
-def ozon_pricing(params):  
-   ...  # 参数和函数定义 (与上面代码相同)
+    # 汇率调整
+    total_cost = total_cost * exchange_rate  
 
+    # 折扣与损耗计算
+    price = total_cost / ((1 - promotion_discount/100) * 
+                         (1 - category_commission/100) *
+                         (1 - exchange_loss/100) *  
+                         (1 - goods_loss/100))
+    return price, profit
 
-# Streamlit实现可视化界面
-st.title('Ozon定价计算工具')  
+# Streamlit实现可视化
+st.title('Ozon定价与利润计算工具')
 
-products = {...}  # 产品参数定义 (与上面代码相同)
+with st.form(key='my_form'):
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        ...
+        purchase_margin = st.number_input('采购成本利润率%', value=20) 
+        profit_margin = st.number_input('销售利润率%', value=30)        
+        
+    with col2:
+        ...
+        
+    submitted = st.form_submit_button('提交')
 
-with st.form(key='product_form'):
-     cols: object = st.columns(2)
-     data = []  
-     for product_name, product_params in products.items():    
-          with cols[0]:                
-               st.write(f'{product_name}定价计算公式:')        
-               formula = f'# 价格 = 采购成本 x (1+{product_params["采购成本利润率"]}%' 
-               st.markdown(formula)
-               for param in product_params:
-                    product_params[param] = st.number_input(f'{product_name}{param}',  
-                                                            value=product_params[param])  
-          data.append(product_params)  
-     submitted = st.form_submit_button('提交')
-     
-     if submitted:         
-          results = []
-          for product in data:            
-               product_name = product.pop('product_name')
-               price, profit = ozon_pricing(product)
-               product['价格'] = price
-               product['利润'] = profit
-               product['product_name'] = product_name                       
-               results.append(product)
-     
-          st.write('定价与利润计算结果:')
-          st.table(pd.DataFrame(results))
+    if submitted:
+        price, profit = ozon_pricing(purchase_cost, purchase_margin,  
+                                    profit_margin,logistics_fee, other_fee, 
+                                     fixed_fee, exchange_rate,  
+                                     promotion_discount,category_commission,
+                                     exchange_loss, goods_loss)
+        st.write(f'最终定价: ¥{price}')  
+        st.write(f'利润: ¥{profit}') 
