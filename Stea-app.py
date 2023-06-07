@@ -1,3 +1,4 @@
+
 import streamlit as st
 
 def ozon_pricing(params):
@@ -9,9 +10,10 @@ def ozon_pricing(params):
 # Streamlit实现可视化  
 st.title('Ozon定价计算工具')
 
-products = {'产品1':{'purchase_cost':15, 'purchase_margin':20, ...},     
-            '产品2':{'purchase_cost':20, 'purchase_margin':25, ...},
-            '产品3':{'purchase_cost':25, 'purchase_margin':30, ...},  
+products = {
+   '产品1':{'purchase_cost':15, 'purchase_margin':20, ...},
+   '产品2':{'purchase_cost':20, 'purchase_margin':25, ...},
+   '产品3':{'purchase_cost':25, 'purchase_margin':30, ...},  
 }
 
 with st.form(key='product_form'):
