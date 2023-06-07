@@ -1,5 +1,5 @@
+python
 import streamlit as st
-
 def ozon_pricing(
     purchase_cost,
     purchase_margin, 
@@ -36,9 +36,9 @@ with st.form(key='my_form'):
     ...
     
 if submitted:
-    price, formula = ozon_pricing(purchase_cost, purchase_margin, 
-                                 logistics_fee, other_fee,fixed_fee, 
-                                 exchange_rate,promotion_discount,         
+    price, formula = ozon_pricing(purchase_cost, purchase_margin,  
+                                 logistics_fee, other_fee,fixed_fee,  
+                                 exchange_rate,promotion_discount,        
                                  category_commission,exchange_loss,goods_loss)
     st.write(f'最终定价: ¥{price}')
-    st.latex(formula)  # 展示计算公式
+    st.latex(formula)
