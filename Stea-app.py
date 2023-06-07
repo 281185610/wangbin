@@ -1,13 +1,3 @@
-这个语法错误是由于字典的键值对最后一个项目后面缺少逗号导致的。
-应该将products字典修改为:
-python
-products = {'产品1':{'purchase_cost':15, 'purchase_margin':20, ...}, 
-            '产品2':{'purchase_cost':20, 'purchase_margin':25, ...},
-            '产品3':{'purchase_cost':25, 'purchase_margin':30, ...},  
-} 
-增加最后一个项目'产品3'后面的逗号 ',' 即可解决这个语法错误。
-完整的代码为:
-python
 import streamlit as st
 
 def ozon_pricing(params):
