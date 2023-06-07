@@ -1,76 +1,52 @@
+python
 import streamlit as st
 import pandas as pd
 
 def ozon_pricing(params):
-    purchase_cost = params['purchase_cost']  
-    purchase_margin = params['purchase_margin'] 
-    logistics_fee = params['logistics_fee']  
-    other_fee = params['other_fee']
-    fixed_fee = params['fixed_fee']
-    exchange_rate = params['exchange_rate']
-    promotion_discount = params['promotion_discount']
-    category_commission = params['category_commission'] 
-    exchange_loss = params['exchange_loss']
-    goods_loss = params['goods_loss']
-    profit_margin = params['profit_margin']
-    
+    采购成本 = params['采购成本']  
+    采购成本利润率 = params['采购成本利润率']
+    物流费用 = params['物流费用']  
+    其他费用 = params['其他费用']
+    固定费用 = params['固定费用']
+    汇率 = params['汇率']
+    促销折扣 = params['促销折扣']
+    类目佣金 = params['类目佣金'] 
+    汇率损失 = params['汇率损失']
+    货物损失 = params['货物损失']
+    利润率 = params['利润率']
+
     # 采购成本加成计算
-    cost_plus = purchase_cost * (1 + purchase_margin/100)  
+    成本加成 = 采购成本 * (1 + 采购成本利润率/100)  
     
     # 其他费用计算 
-    total_cost = cost_plus + logistics_fee + other_fee + fixed_fee   
+    总成本 = 成本加成 + 物流费用 + 其他费用 + 固定费用   
     
     # 汇率调整
-    total_cost = total_cost * exchange_rate   
+    总成本 = 总成本 * 汇率
     
     # 折扣与损耗计算
-    price = total_cost / ((1 - promotion_discount/100) *  
-                         (1 - category_commission/100) * 
-                         (1 - exchange_loss/100) *  
-                         (1 - goods_loss/100))
+    价格 = 总成本 / ((1 - 促销折扣/100) *  
+                         (1 - 类目佣金/100) * 
+                         (1 - 汇率损失/100) *  
+                         (1 - 货物损失/100))
                          
     # 利润计算                
-    profit = price * profit_margin/100
-    return price, profit  
+    利润 = 价格 * 利润率/100
+    return 价格, 利润  
 
 # Streamlit实现可视化
 st.title('Ozon定价计算工具')
 
 products = {
-    '产品1': {'purchase_cost':15,  'purchase_margin':20,  
-              'logistics_fee':10,  'other_fee':5,  
-              'fixed_fee':100, 'exchange_rate':15,  
-              'promotion_discount':10, 'category_commission':8,   
-              'exchange_loss':3,   'goods_loss':1, 'profit_margin':30}, 
-    '产品2': {'purchase_cost':25,  'purchase_margin':25,  
-              'logistics_fee':15,  'other_fee':8,  
-              'fixed_fee':120, 'exchange_rate':18,  
-              'promotion_discount':12,'category_commission':10,    
-              'exchange_loss':5,   'goods_loss':3, 'profit_margin':35}  
+    '产品1': {'采购成本':15,  '采购成本利润率':20,  
+              '物流费用':10,  '其他费用':5,  
+              '固定费用':100, '汇率':15,  
+              '促销折扣':10, '类目佣金':8,   
+              '汇率损失':3,   '货物损失':1, '利润率':30}, 
+    '产品2': {'采购成本':25,  '采购成本利润率':25,  
+              '物流费用':15,  '其他费用':8,  
+              '固定费用':120, '汇率':18,  
+              '促销折扣':12,'类目佣金':10,    
+              '汇率损失':5,   '货物损失':3, '利润率':35}  
 }  
-
-with st.form(key='product_form'): 
-    cols = st.columns(2)
-    data = []
-    for product_name, product_params in products.items():
-        with cols[0]:        
-            st.write(f'{product_name}定价计算公式:')
-            formula = f'价格 = 采购成本 × (1 + 采购成本利润率{product_params["purchase_margin"]}%) '       
-            formula += f'+ 物流费用{product_params["logistics_fee"]} + 其他费用{product_params["other_fee"]} '
-            formula += f'+ 固定费用{product_params["fixed_fee"]} '
-            formula += f'× 汇率{product_params["exchange_rate"]} '  
-            formula += f'÷ (1 - 促销折扣{product_params["promotion_discount"]}% - '
-            formula += f'类目佣金{product_params["category_commission"]}% - ' 
-            formula += f'汇率损失{product_params["exchange_loss"]}% - '
-            formula += f'货物损失{product_params["goods_loss"]}%) '
-            formula += f'× (1 + 利润率{product_params["profit_margin"]}%)'
-            st.latex(formula)  
-            
-            for param_name in product_params:             
-                product_params[param_name] = st.number_input(
-                    f'{product_name}{param_name}',
-                    value=product_params[param_name], 
-                    help=f'请输入{product_name}{param_name}'
-                )
-        data.append(product_params) 
-    submitted = st.form_submit_button('提交')
+# 下面代码与上一个版本相同       
