@@ -2,50 +2,35 @@ import streamlit as st
 import pandas as pd
 
 def ozon_pricing(params):
-    采购成本 = params['采购成本']  
-    采购成本利润率 = params['采购成本利润率']
-    物流费用 = params['物流费用']  
-    其他费用 = params['其他费用']
-    固定费用 = params['固定费用']
-    汇率 = params['汇率']
-    促销折扣 = params['促销折扣']
-    类目佣金 = params['类目佣金'] 
-    汇率损失 = params['汇率损失']
-    货物损失 = params['货物损失']
-    利润率 = params['利润率']
+    ...  # 参数和函数定义 (与上面代码相同)  
 
-    # 采购成本加成计算
-    成本加成 = 采购成本 * (1 + 采购成本利润率/100)  
-    
-    # 其他费用计算 
-    总成本 = 成本加成 + 物流费用 + 其他费用 + 固定费用   
-    
-    # 汇率调整
-    总成本 = 总成本 * 汇率
-    
-    # 折扣与损耗计算
-    价格 = 总成本 / ((1 - 促销折扣/100) *  
-                         (1 - 类目佣金/100) * 
-                         (1 - 汇率损失/100) *  
-                         (1 - 货物损失/100))
-                         
-    # 利润计算                
-    利润 = 价格 * 利润率/100
-    return 价格, 利润  
-
-# Streamlit实现可视化
+# Streamlit实现可视化界面   
 st.title('Ozon定价计算工具')
 
-products = {
-    '产品1': {'采购成本':15,  '采购成本利润率':20,  
-              '物流费用':10,  '其他费用':5,  
-              '固定费用':100, '汇率':15,  
-              '促销折扣':10, '类目佣金':8,   
-              '汇率损失':3,   '货物损失':1, '利润率':30}, 
-    '产品2': {'采购成本':25,  '采购成本利润率':25,  
-              '物流费用':15,  '其他费用':8,  
-              '固定费用':120, '汇率':18,  
-              '促销折扣':12,'类目佣金':10,    
-              '汇率损失':5,   '货物损失':3, '利润率':35}  
-}  
-# 下面代码与上一个版本相同       
+products = {...}  # 产品参数定义 (与上面代码相同)  
+
+with st.form(key='product_form'): 
+    cols = st.columns(2)
+    data = []
+    for product_name, product_params in products.items():
+        with cols[0]:        
+            st.write(f'{product_name}定价计算公式:')       
+            formula = f'# 价格 = 采购成本 x (1+{product_params["采购成本利润率"]}%' 
+            st.markdown(formula)
+            for param in product_params:
+                product_params[param] = st.number_input(f'{product_name}{param}', value=product_params[param]) 
+        data.append(product_params) 
+    submitted = st.form_submit_button('提交')
+        
+    if submitted:
+        results = []
+        for product in data:         
+            product_name =  product.pop('product_name')
+            price, profit = ozon_pricing(product)
+            product['价格'] = price
+            product['利润'] = profit 
+            product['product_name'] = product_name
+            results.append(product) 
+            
+        st.write('定价与利润计算结果:')
+        st.table(pd.DataFrame(results))
