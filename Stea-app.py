@@ -44,25 +44,26 @@ df = pd.DataFrame(columns=['采购成本', '采购成本利润率%', '物流费�
                   index=[0]) 
 st.write(df)
 
-# 显示输入表格 
+# 显示输入表格  
 st.write('**请输入商品信息:**')
 df = pd.DataFrame(columns=['采购成本', '采购成本利润率%', '物流费用', '其他费用', '固定费用', '汇率',  
                            '促销折扣%', '类目佣金%', '汇率损失%', '货物损失%'], 
                   index=[0])
 st.write(df)
 
+st.write('**添加商品信息:**')
+with st.form(key='my_form'):
+    # ...
+    
+    submitted = st.form_submit_button('添加')
+    if submitted:
+        row = {'采购成本': purchase_cost,  
+               # ...     
+               }  
+        df = df.append(row, ignore_index=True)
+        st.table(df)
+        
 # ...
-
-submitted = st.form_submit_button('添加')
-if submitted:
-    row = {'采购成本': purchase_cost,  
-           '采购成本利润率%': purchase_margin,  
-           # ...
-           }  
-    df = df.append(row, ignore_index=True)  
-    st.table(df)
-
-# ...  
 
 # 添加商品信息到输入表格
 st.write('**添加商品信息:**')
