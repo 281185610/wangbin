@@ -1,9 +1,9 @@
 import streamlit as st
 
-def ozon_pricing(purchase_cost):  
-if not isinstance(purchase_cost, (int, float)):
-        st.warning('请输入数值类型的参数!')
-        return
+        def ozon_pricing(purchase_cost):  
+        if not isinstance(purchase_cost, (int, float)):
+                 st.warning('请输入数值类型的参数!')
+                 return
     # 其他参数也增加类型检查......    
 
         # 采购成本加成计算 
