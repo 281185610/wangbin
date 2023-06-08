@@ -1,36 +1,77 @@
 import streamlit as st
 
-# 定义变量并添加类型注释  
-purchaseCost: float  
-purchaseMargin = 10  
-logisticsFee = 5       
-otherFee = 10        
-fixedFee = 20
-exchangeRate = 6.5  
-promotionDiscount = 8  
-categoryCommission = 5  
-exchangeLoss = 2     
-goodsLoss = 3 
-company_name = 'Ozon中国'   
+def ozon_pricing(
+    purchase_cost,
+    purchase_margin,
+    logistics_fee,
+    other_fee,
+    fixed_fee,
+    exchange_rate,
+    promotion_discount,
+    category_commission,
+    exchange_loss,
+    goods_loss
+):
+    # 采购成本加成计算
+    cost_plus = purchase_cost * (1 + purchase_margin/100)
+    # 其他费用计算
+    total_cost = cost_plus + logistics_fee + other_fee + fixed_fee
+    # 汇率调整
+    total_cost = total_cost * exchange_rate
+    # 折扣与损耗计算
+    price = total_cost / ((1 - promotion_discount/100) *
+                         (1 - category_commission/100) *
+                         (1 - exchange_loss/100) *
+                         (1 - goods_loss/100))
+    return price
 
-def ozonPricing(purchaseCost: float):  
-     """Ozon定价计算函数"""  
-     # function body......
-     
-# Streamlit实现可视化     
-st.latex(f'定价 = {purchaseCost}*(1 + {purchaseMargin}/100)*(1 - {promotionDiscount}/100)*{exchangeRate}*(1 - {exchangeLoss}/100)')
-st.title(f'{company_name}定价计算工具')  
+# Streamlit实现可视化
+st.title('Ozon定价计算工具')
 
-# 获取用户输入并转换为float类型
-purchaseCost = st.number_input('请输入采购成本', min_value=0.0, max_value=1000000,  
-                               step=0.01, format='%f')
+# 显示计算公式
+st.write('**计算公式:**')
+st.latex(r'''
+price = \frac{total\_cost}{(1 - \frac{promotion\_discount}{100})
+(1 - \frac{category\_commission}{100}) (1 - \frac{exchange\_loss}{100})
+(1 - \frac{goods\_loss}{100})}
+''')
 
-# 调用函数进行计算  
-if purchaseCost:  
-     price = purchaseCost * (1 + purchaseMargin/100)  
-     price = price * (1 - promotionDiscount/100)  
-     price = price * exchangeRate * (1 - exchangeLoss/100)  
-     st.write(f'{company_name}最终定价: ¥{price}')  
-     # ......
-else:  
-     st.warning('请输入采购成本!')
+# 显示输入字段
+with st.form(key='my_form'):
+    col1, col2 = st.columns(2)
+    with col1:
+        purchase_cost = st.number_input('采购成本', value=15,
+                                        help='请输入商品采购成本价格')
+        purchase_margin = st.number_input('采购成本利润率%', value=20)
+        logistics_fee = st.number_input('物流费用', value=10)
+        other_fee = st.number_input('其他费用', value=5)
+        fixed_fee = st.number_input('固定费用', value=100)
+        exchange_rate = st.number_input('汇率', value=15)
+        # 显示字段值
+        st.write('**字段值:**')
+        st.write(f'采购成本: {purchase_cost}')
+        st.write(f'采购成本利润率%: {purchase_margin}')
+        st.write(f'物流费用: {logistics_fee}')
+        st.write(f'其他费用: {other_fee}')
+        st.write(f'固定费用: {fixed_fee}')
+        st.write(f'汇率: {exchange_rate}')
+    with col2:
+        promotion_discount = st.number_input('促销折扣%', value=10)
+        category_commission = st.number_input('类目佣金%', value=8)
+        exchange_loss = st.number_input('汇率损失%', value=3)
+        goods_loss = st.number_input('货物损失%', value=1)
+        # 显示字段值
+        st.write('**字段值:**')
+        st.write(f'促销折扣%: {promotion_discount}')
+        st.write(f'类目佣金%: {category_commission}')
+        st.write(f'汇率损失%: {exchange_loss}')
+        st.write(f'货物损失%: {goods_loss}')
+    submitted = st.form_submit_button('提交')
+    if submitted:
+        price = ozon_pricing(purchase_cost, purchase_margin, logistics_fee,
+                             other_fee, fixed_fee, exchange_rate,
+                             promotion_discount, category_commission,
+                             exchange_loss, goods_loss)
+        # 显示计算值
+        st.write('**计算值:**')
+        st.write(f'最终定价: ¥{price:.2f}')
