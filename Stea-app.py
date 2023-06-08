@@ -1,4 +1,3 @@
-python
 import streamlit as st
 def ozon_pricing(
     purchase_cost,
@@ -40,5 +39,5 @@ if submitted:
                                  logistics_fee, other_fee,fixed_fee,  
                                  exchange_rate,promotion_discount,        
                                  category_commission,exchange_loss,goods_loss)
-    st.write(f'最终定价: ¥{price}')
-    st.latex(formula)
+    st.write(f'最终定价: ¥{price}') 
+    st.latex(formula)  # 增加计算公式显示
