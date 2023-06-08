@@ -14,7 +14,7 @@ goodsLoss = 3        # 货损,百分数
 
 def ozonPricing(purchaseCost: float):  
      """Ozon定价计算函数"""  
-     # function body...... 
+     # function body......
 
 # Streamlit实现可视化
 st.title('Ozon定价计算工具')
@@ -27,9 +27,10 @@ purchaseCost = st.number_input('请输入采购成本', min_value=0.0, max_value
 if purchaseCost:  
      price, formula = ozonPricing(purchaseCost)  
      st.write(f'最终定价: ¥{price}')  
-     st.latex(formula)  
+     st.latex(formula)
 else:  
-     st.warning('请输入采购成本!')
+     st.warning('请输入采购成本!')  
+
 
 
 # Streamlit实现可视化 
