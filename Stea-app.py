@@ -2,9 +2,10 @@ import streamlit as st
 
 # 定义变量
 purchaseMargin = 10   
-logisticsFee = 5
+logisticsFee = 5  
 otherFee = 10
 fixedFee = 20
+exchangeRate = 6.5
 
 def ozonPricing(purchaseCost):  
      """Ozon定价计算函数"""
@@ -21,8 +22,8 @@ def ozonPricing(purchaseCost):
      totalCost = costPlus + logisticsFee + otherFee + fixedFee  
 
      # 汇率调整
-     totalCost = totalCost * exchangeRate  
-
+     totalCost = totalCost * exchangeRate
+     
      # 折扣与损耗计算
      price = totalCost / ((1 - promotionDiscount/100) *  
                           (1 - categoryCommission/100) *  
