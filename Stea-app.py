@@ -2,19 +2,18 @@ import streamlit as st
 
 def ozon_pricing(
     purchase_cost,  
-    ...  
+
 ):  
     if not isinstance(purchase_cost, (int, float)):
         st.warning('请输入数值类型的参数!')
         return
-    ...
+ 
 
 # Streamlit实现可视化  
 st.title('Ozon定价计算工具')  
 
 # 定义参数初值  
 purchase_cost = 15  
-...  
 
 # 调用函数进行计算  
 if isinstance(purchase_cost, (int, float)): 
