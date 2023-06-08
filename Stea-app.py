@@ -9,12 +9,12 @@ def ozon_pricing(purchase_cost):
 # 定义参数初值
 purchase_cost = 15          
 
-# 调用函数进行计算
-if isinstance(purchase_cost, (int, float)):
+ if isinstance(purchase_cost, (int, float)):
             cost_plus = purchase_cost * (1 + purchase_margin/100)   
   
+           total_cost = cost_plus + logistics_fee + other_fee + fixed_fee    
+ 
         # 采购成本加成计算        
-          total_cost = cost_plus + logistics_fee + other_fee + fixed_fee  
  
     # 其他费用计算
 
