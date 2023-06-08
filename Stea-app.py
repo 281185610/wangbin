@@ -3,11 +3,12 @@ import streamlit as st
 # 定义变量
 purchaseMargin = 10   
 logisticsFee = 5  
-otherFee = 10
+otherFee = 10  
 fixedFee = 20
-exchangeRate = 6.5
+exchangeRate = 6.5  
 promotionDiscount = 8
-categoryCommission = 5 
+categoryCommission = 5
+exchangeLoss = 2
 
 def ozonPricing(purchaseCost):  
      """Ozon定价计算函数"""
@@ -46,4 +47,4 @@ if purchaseCost:
      st.write(f'最终定价: ¥{price}')
      st.latex(formula)
 else:
-     st.warning('请输入采购成本!')
+     st.warning('请输入采购成本!')     
