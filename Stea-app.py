@@ -2,6 +2,9 @@ import streamlit as st
 
 # 定义变量
 purchaseMargin = 10   
+logisticsFee = 5
+otherFee = 10
+fixedFee = 20
 
 def ozonPricing(purchaseCost):  
      """Ozon定价计算函数"""
