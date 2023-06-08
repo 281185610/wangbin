@@ -39,12 +39,12 @@ st.latex(r'''
 
 # 显示输入表格
 st.write('**请输入商品信息:**')
-df = pd.DataFrame(columns=['序号', '采购成本', '采购成本利润率%', '物流费用', '其他费用', '固定费用', '汇率',
+df = pd.DataFrame(columns=['采购成本', '采购成本利润率%', '物流费用', '其他费用', '固定费用', '汇率',
                            '促销折扣%', '类目佣金%', '汇率损失%', '货物损失%'])
 st.write(df)
 
 # 显示计算结果表格
-result_df = pd.DataFrame(columns=['序号', '采购成本', '最终定价'])
+result_df = pd.DataFrame(columns=['采购成本', '最终定价'])
 st.write('**计算结果:**')
 st.write(result_df)
 
@@ -53,23 +53,21 @@ st.write('**添加商品信息:**')
 with st.form(key='my_form'):
     col1, col2 = st.columns(2)
     with col1:
-        purchase_cost = st.number_input('采购成本', value=15,
-                                        help='请输入商品采购成本价格')
-        purchase_margin = st.number_input('采购成本利润率%', value=20)
-        logistics_fee = st.number_input('物流费用', value=10)
-        other_fee = st.number_input('其他费用', value=5)
-        fixed_fee = st.number_input('固定费用', value=100)
-        exchange_rate = st.number_input('汇率', value=15)
+        purchase_cost = st.number_input('采购成本', help='请输入商品采购成本价格')
+        purchase_margin = st.number_input('采购成本利润率%', None, None, None, '%')
+        logistics_fee = st.number_input('物流费用', None, None, None, '%')
+        other_fee = st.number_input('其他费用', None, None, None, '%')
+        fixed_fee = st.number_input('固定费用', None, None, None, '%')
+        exchange_rate = st.number_input('汇率', None, None, None, '%')
     with col2:
-        promotion_discount = st.number_input('促销折扣%', value=10)
-        category_commission = st.number_input('类目佣金%', value=8)
-        exchange_loss = st.number_input('汇率损失%', value=3)
-        goods_loss = st.number_input('货物损失%', value=1)
+        promotion_discount = st.number_input('促销折扣%', None, None, None, '%')
+        category_commission = st.number_input('类目佣金%', None, None, None, '%')
+        exchange_loss = st.number_input('汇率损失%', None, None, None, '%')
+        goods_loss = st.number_input('货物损失%', None, None, None, '%')
 
     submitted = st.form_submit_button('添加')
     if submitted:
-        row = {'序号': len(df) + 1,
-               '采购成本': purchase_cost,
+        row = {'采购成本': purchase_cost,
                '采购成本利润率%': purchase_margin,
                '物流费用': logistics_fee,
                '其他费用': other_fee,
@@ -89,7 +87,7 @@ if not df.empty:
                              row['物流费用'], row['其他费用'], row['固定费用'],
                              row['汇率'], row['促销折扣%'], row['类目佣金%'],
                              row['汇率损失%'], row['货物损失%'])
-        result_row = {'序号': row['序号'], '采购成本': row['采购成本'], '最终定价': price}
+        result_row = {'采购成本': row['采购成本'], '最终定价': price}
         result_df = result_df.append(result_row, ignore_index=True)
 
     st.write('**计算结果:**')
