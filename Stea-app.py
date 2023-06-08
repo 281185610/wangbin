@@ -1,6 +1,12 @@
 import streamlit as st
 import pandas as pd
 
+
+# ...  
+df = pd.DataFrame()
+
+
+
 def ozon_pricing(
     purchase_cost=0.0,
     purchase_margin=0.0,
@@ -48,39 +54,25 @@ st.write(df)
 
 
 
-# 添加商品信息到输入表格
+# 添加商品信息到输入表格  
 st.write('**添加商品信息:**')
 with st.form(key='my_form'):
-    col1, col2 = st.columns(2)
-    with col1:
-        purchase_cost = st.number_input('采购成本', help='请输入商品采购成本价格', value=0.0)
-        purchase_margin = st.number_input('采购成本利润率%', min_value=0.0, max_value=100.0, value=10.0) 
-        logistics_fee = st.number_input('物流费用', min_value=0.0, value=0.0)
-        other_fee = st.number_input('其他费用', min_value=0.0, value=0.0)
-        fixed_fee = st.number_input('固定费用', min_value=0.0, value=0.0)
-        exchange_rate = st.number_input('汇率', min_value=0.0, value=0.0)
-    with col2:
-        promotion_discount = st.number_input('促销折扣%', min_value=0.0, value=0.0)
-        category_commission = st.number_input('类目佣金%', min_value=0.0, value=0.0)
-        exchange_loss = st.number_input('汇率损失%', min_value=0.0, value=0.0)
-        goods_loss = st.number_input('货物损失%', min_value=0.0, value=0.0)
-
+# ... 
     submitted = st.form_submit_button('添加')
     if submitted:
-        row = {'采购成本': purchase_cost,
-               '采购成本利润率%': purchase_margin,
-               '物流费用': logistics_fee,
-               '其他费用': other_fee,
-               '固定费用': fixed_fee,
+        row = {'采购成本': purchase_cost,  
+               '采购成本利润率%': purchase_margin,  
+               '物流费用': logistics_fee,  
+               '其他费用': other_fee,  
+               '固定费用': fixed_fee,  
                '汇率': exchange_rate,
-               '促销折扣%': promotion_discount,
+               '促销折扣%': promotion_discount, 
                '类目佣金%': category_commission,
-               '汇率损失%': exchange_loss,
+               '汇率损失%': exchange_loss,  
                '货物损失%': goods_loss}
         df = df.append(row, ignore_index=True)
         st.table(df)
-
-
+# ...       
 
 price = 0
 # 计算最终定价并添加到结果表格中
