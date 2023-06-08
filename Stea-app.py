@@ -12,27 +12,33 @@ categoryCommission = 5 # 产品佣金,百分数
 exchangeLoss = 2     # 汇率损失,百分数
 goodsLoss = 3        # 货损,百分数
 
-def ozonPricing(purchaseCost: float) -> (float, str):  
+def ozonPricing(purchaseCost: float):  
      """Ozon定价计算函数"""
      # 参数类型检查......
-     #  function body......
+     #  function body......  
 
-     # 采购成本加成计算  
+     # 采购成本加成计算
      costPlus = purchaseCost * (1 + purchaseMargin/100)   
      
-     # 其他费用计算
+     # 其他费用计算 
      totalCost = costPlus + logisticsFee + otherFee + fixedFee  
 
      # 汇率调整
-     totalCost = totalCost * exchangeRate
+     totalCostAfterExchangeRate = totalCost * exchangeRate
      
-     # 折扣与损耗计算
-     price = totalCost / ((1 - promotionDiscount/100) *  
-                          (1 - categoryCommission/100) *  
-                          (1 - exchangeLoss/100) *  
-                          (1 - goodsLoss/100))
-     formula = f'定价={totalCost} / (1 - {promotionDiscount}%折扣) / (1 - {categoryCommission}%佣金) / (1-{exchangeLoss}%汇率损失) / (1-{goodsLoss}%货损)'
-     return price, formula  
+     # 折扣因素提取 
+     discount = 1 - promotionDiscount/100 
+     commission = 1 - categoryCommission/100
+     exchangeLossFactor = 1 - exchangeLoss/100
+     goodsLossFactor = 1 - goodsLoss/100
+     
+     # 价格计算
+     price = totalCostAfterExchangeRate / (discount * commission * 
+                                          exchangeLossFactor *
+                                          goodsLossFactor  )
+     formula = f'定价={totalCostAfterExchangeRate} / 折扣 / 佣金 / 汇率损失 / 货损'
+     return price, formula
+
 
 # Streamlit实现可视化 
 st.title('Ozon定价计算工具')  
