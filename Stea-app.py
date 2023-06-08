@@ -56,11 +56,11 @@ with st.form(key='my_form'):
         st.write(f'固定费用: {fixed_fee}')
         st.write(f'汇率: {exchange_rate}')
     with col2:
-        if st.button('计算'):
-    price = ozon_pricing(purchase_cost, purchase_margin, logistics_fee,
-                        other_fee, fixed_fee, exchange_rate,
-                        promotion_discount, category_commission,
-                        exchange_loss, goods_loss)
+                if st.button('计算'):
+       price = ozon_pricing(purchase_cost, purchase_margin, logistics_fee,  
+                            other_fee, fixed_fee, exchange_rate,  
+                            promotion_discount, category_commission,  
+                            exchange_loss, goods_loss)
 
         promotion_discount = st.number_input('促销折扣%', value=10)
         category_commission = st.number_input('类目佣金%', value=8)
