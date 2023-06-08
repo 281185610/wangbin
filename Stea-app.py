@@ -2,16 +2,16 @@ import streamlit as st
 import pandas as pd
 
 def ozon_pricing(
-    purchase_cost,
-    purchase_margin,
-    logistics_fee,
-    other_fee,
-    fixed_fee,
-    exchange_rate,
-    promotion_discount,
-    category_commission,
-    exchange_loss,
-    goods_loss
+    purchase_cost=0.0,
+    purchase_margin=0.0,
+    logistics_fee=0.0,
+    other_fee=0.0,
+    fixed_fee=0.0,
+    exchange_rate=0.0,
+    promotion_discount=0.0,
+    category_commission=0.0,
+    exchange_loss=0.0,
+    goods_loss=0.0
 ):
     # 采购成本加成计算
     cost_plus = purchase_cost * (1 + purchase_margin/100)
@@ -53,17 +53,17 @@ st.write('**添加商品信息:**')
 with st.form(key='my_form'):
     col1, col2 = st.columns(2)
     with col1:
-        purchase_cost = st.number_input('采购成本', help='请输入商品采购成本价格')
-        purchase_margin = st.number_input('采购成本利润率%', 1, 100, 0.0, '%')
-        logistics_fee = st.number_input('物流费用', 0.0, None, 0.0, '%')
-        other_fee = st.number_input('其他费用', 0.0, None, 0.0, '%')
-        fixed_fee = st.number_input('固定费用', 0.0, None, 0.0, '%')
-        exchange_rate = st.number_input('汇率', 0.0, None, 0.0, '%')
+        purchase_cost = st.number_input('采购成本', help='请输入商品采购成本价格', value=0.0)
+        purchase_margin = st.number_input('采购成本利润率%', min_value=0.0, max_value=100.0, value=0.0, format='%')
+        logistics_fee = st.number_input('物流费用', min_value=0.0, value=0.0, format='%')
+        other_fee = st.number_input('其他费用', min_value=0.0, value=0.0, format='%')
+        fixed_fee = st.number_input('固定费用', min_value=0.0, value=0.0, format='%')
+        exchange_rate = st.number_input('汇率', min_value=0.0, value=0.0, format='%')
     with col2:
-        promotion_discount = st.number_input('促销折扣%', 0.0, None, 0.0, '%')
-        category_commission = st.number_input('类目佣金%', 0.0, None, 0.0, '%')
-        exchange_loss = st.number_input('汇率损失%', 0.0, None, 0.0, '%')
-        goods_loss = st.number_input('货物损失%', 0.0, None, 0.0, '%')
+        promotion_discount = st.number_input('促销折扣%', min_value=0.0, value=0.0, format='%')
+        category_commission = st.number_input('类目佣金%', min_value=0.0, value=0.0, format='%')
+        exchange_loss = st.number_input('汇率损失%', min_value=0.0, value=0.0, format='%')
+        goods_loss = st.number_input('货物损失%', min_value=0.0, value=0.0, format='%')
 
     submitted = st.form_submit_button('添加')
     if submitted:
