@@ -28,17 +28,16 @@ def ozon_pricing(
 # Streamlit实现可视化
 st.title('Ozon定价计算工具')
 
-# 显示计算公式的容器
-with st.beta_container():
-    st.write('**计算公式:**')
-    st.latex(r'''
-    price = \frac{total\_cost}{(1 - \frac{promotion\_discount}{100})
-    (1 - \frac{category\_commission}{100}) (1 - \frac{exchange\_loss}{100})
-    (1 - \frac{goods\_loss}{100})}
-    ''')
+# 显示计算公式
+st.write('**计算公式:**')
+st.latex(r'''
+price = \frac{total\_cost}{(1 - \frac{promotion\_discount}{100})
+(1 - \frac{category\_commission}{100}) (1 - \frac{exchange\_loss}{100})
+(1 - \frac{goods\_loss}{100})}
+''')
 
-# 显示输入字段和计算值的容器
-with st.beta_container():
+# 显示输入字段
+with st.form(key='my_form'):
     col1, col2 = st.columns(2)
     with col1:
         purchase_cost = st.number_input('采购成本', value=15,
@@ -67,11 +66,12 @@ with st.beta_container():
         st.write(f'类目佣金%: {category_commission}')
         st.write(f'汇率损失%: {exchange_loss}')
         st.write(f'货物损失%: {goods_loss}')
+    submitted = st.form_submit_button('提交')
+    if submitted:
+        price = ozon_pricing(purchase_cost, purchase_margin, logistics_fee,
+                             other_fee, fixed_fee, exchange_rate,
+                             promotion_discount, category_commission,
+                             exchange_loss, goods_loss)
         # 显示计算值
-        if st.button('计算'):
-            price = ozon_pricing(purchase_cost, purchase_margin, logistics_fee,
-                                other_fee, fixed_fee, exchange_rate,
-                                promotion_discount, category_commission,
-                                exchange_loss, goods_loss)
-            st.write('**计算值:**')
-            st.write(f'最终定价: ¥{price:.2f}')
+        st.write('**计算值:**')
+        st.write(f'最终定价: ¥{price:.2f}')
