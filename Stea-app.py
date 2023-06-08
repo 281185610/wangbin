@@ -26,14 +26,14 @@ def ozon_pricing(
 # Streamlit实现可视化
 st.title('Ozon定价计算工具')
 # 显示计算公式
-st.write('*计算公式:*')
-st.latex(r'''
-st.write('**计算公式:**')
-st.latex(r'''
-定价 = \frac{总成本}{(1 - \frac{促销折扣}{100}) 
-(1 - \frac{类目佣金}{100}) (1 - \frac{汇率损失}{100})
-(1 - \frac{货物损失}{100})}
-''')
+    st.write('*计算公式:*')
+    st.latex(r'''
+    st.write('**计算公式:**')
+    st.latex(r'''
+    定价 = \frac{总成本}{(1 - \frac{促销折扣}{100}) 
+    (1 - \frac{类目佣金}{100}) (1 - \frac{汇率损失}{100})
+    (1 - \frac{货物损失}{100})}
+    ''')
 # 显示输入字段
 with st.form(key='my_form'):
     col1, col2 = st.columns(2)
