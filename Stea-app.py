@@ -44,12 +44,7 @@ df = pd.DataFrame(columns=['采购成本', '采购成本利润率%', '物流费�
                   index=[0]) 
 st.write(df)
 
-# 显示输入表格  
-st.write('**请输入商品信息:**')
-df = pd.DataFrame(columns=['采购成本', '采购成本利润率%', '物流费用', '其他费用', '固定费用', '汇率',  
-                           '促销折扣%', '类目佣金%', '汇率损失%', '货物损失%'], 
-                  index=[0])
-st.write(df)
+
 
 
 
