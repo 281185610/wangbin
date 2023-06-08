@@ -1,5 +1,7 @@
-
 import streamlit as st
+
+# 定义变量
+purchaseMargin = 10   
 
 def ozonPricing(purchaseCost):  
      """Ozon定价计算函数"""
@@ -30,7 +32,7 @@ def ozonPricing(purchaseCost):
 st.title('Ozon定价计算工具')  
 
 # 获取用户输入  
-purchaseCost = st.number_input('请输入采购成本', min_value=1, max_value=1000000, value=1)
+purchaseCost = st.number_input('请输入采购成本', min_value=1, max_value=1000000, value=1) 
 
 # 调用函数进行计算
 if purchaseCost: 
@@ -38,4 +40,4 @@ if purchaseCost:
      st.write(f'最终定价: ¥{price}')
      st.latex(formula)
 else:
-     st.warning('请输入采购成本!') 
+     st.warning('请输入采购成本!')
