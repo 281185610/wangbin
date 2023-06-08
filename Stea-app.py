@@ -54,16 +54,16 @@ with st.form(key='my_form'):
     col1, col2 = st.columns(2)
     with col1:
         purchase_cost = st.number_input('采购成本', help='请输入商品采购成本价格')
-        purchase_margin = st.number_input('采购成本利润率%', 0, None, None, '%')
-        logistics_fee = st.number_input('物流费用', None, None, None, '%')
-        other_fee = st.number_input('其他费用', None, None, None, '%')
-        fixed_fee = st.number_input('固定费用', None, None, None, '%')
-        exchange_rate = st.number_input('汇率', None, None, None, '%')
+        purchase_margin = st.number_input('采购成本利润率%', 0, None, 0.0, '%')
+        logistics_fee = st.number_input('物流费用', 0.0, None, 0.0, '%')
+        other_fee = st.number_input('其他费用', 0.0, None, 0.0, '%')
+        fixed_fee = st.number_input('固定费用', 0.0, None, 0.0, '%')
+        exchange_rate = st.number_input('汇率', 0.0, None, 0.0, '%')
     with col2:
-        promotion_discount = st.number_input('促销折扣%', None, None, None, '%')
-        category_commission = st.number_input('类目佣金%', None, None, None, '%')
-        exchange_loss = st.number_input('汇率损失%', None, None, None, '%')
-        goods_loss = st.number_input('货物损失%', None, None, None, '%')
+        promotion_discount = st.number_input('促销折扣%', 0.0, None, 0.0, '%')
+        category_commission = st.number_input('类目佣金%', 0.0, None, 0.0, '%')
+        exchange_loss = st.number_input('汇率损失%', 0.0, None, 0.0, '%')
+        goods_loss = st.number_input('货物损失%', 0.0, None, 0.0, '%')
 
     submitted = st.form_submit_button('添加')
     if submitted:
