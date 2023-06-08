@@ -1,46 +1,41 @@
+
 import streamlit as st
 
-def ozon_pricing(purchase_cost):  
-        if not isinstance(purchase_cost, (int, float)):
-                 st.warning('请输入数值类型的参数!')
-                 return
-    # 其他参数也增加类型检查......         
+def ozonPricing(purchaseCost):  
+     """Ozon定价计算函数"""
+     if not isinstance(purchaseCost, (int, float)) or purchaseCost <= 0:  
+          st.warning('请输入正确的数值类型参数!')
+          return  
+     
+     # 其他参数也增加类型检查......  
+     
+     # 采购成本加成计算  
+     costPlus = purchaseCost * (1 + purchaseMargin/100)   
+     
+     # 其他费用计算
+     totalCost = costPlus + logisticsFee + otherFee + fixedFee  
 
-# 定义参数初值
-purchase_cost = 15            
+     # 汇率调整
+     totalCost = totalCost * exchangeRate  
 
-if  isinstance(purchase_cost, (int, float)):
-            cost_plus = purchase_cost * (1 + purchase_margin/100)   
- total_cost = cost_plus + logistics_fee + other_fee + fixed_fee          
- 
-        # 采购成本加成计算        
- 
-    # 其他费用计算
-
-    # 汇率调整
-    total_cost = total_cost * exchange_rate
-
-    # 折扣与损耗计算
-    price = total_cost / ((1 - promotion_discount/100) *
-                         (1 - category_commission/100) *
-                         (1 - exchange_loss/100) *
-                         (1 - goods_loss/100))
-    formula = f'定价={total_cost} / (1 - {promotion_discount}%折扣) / (1 - {category_commission}%佣金) / (1-{exchange_loss}%汇率损失) / (1-{goods_loss}%货损)'
-    return price, formula  
+     # 折扣与损耗计算
+     price = totalCost / ((1 - promotionDiscount/100) *  
+                          (1 - categoryCommission/100) *  
+                          (1 - exchangeLoss/100) *  
+                          (1 - goodsLoss/100))
+     formula = f'定价={totalCost} / (1 - {promotionDiscount}%折扣) / (1 - {categoryCommission}%佣金) / (1-{exchangeLoss}%汇率损失) / (1-{goodsLoss}%货损)'
+     return price, formula  
 
 # Streamlit实现可视化
 st.title('Ozon定价计算工具')  
 
-                        
-# Form获取参数  
-with st.form(key='my_form'):
-    ...  
-if submitted:
-    purchase_cost = st.number_input('采购成本', value=15) 
-    purchase_cost = purchase_cost
-    if isinstance(purchase_cost, (int, float)):
-        price, formula = ozon_pricing(purchase_cost)
-        st.write(f'最终定价: ¥{price}')
-        st.latex(formula)  
-    else:
-        st.warning('请输入数值类型的参数!')
+# 获取用户输入  
+purchaseCost = st.number_input('请输入采购成本', min_value=1, max_value=1000000, value=1)
+
+# 调用函数进行计算
+if purchaseCost: 
+     price, formula = ozonPricing(purchaseCost)
+     st.write(f'最终定价: ¥{price}')
+     st.latex(formula)
+else:
+     st.warning('请输入采购成本!') 
