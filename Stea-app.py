@@ -56,9 +56,9 @@ with st.form(key='my_form'):
         purchase_cost = st.number_input('采购成本', help='请输入商品采购成本价格', value=0.0)
         purchase_margin = st.number_input('采购成本利润率%', min_value=0.0, max_value=100.0, value=10.0) 
         logistics_fee = st.number_input('物流费用', min_value=0.0, value=0.0)
-        other_fee = st.number_input('其他费用', min_value=0.0, value=0.0, format='%')
-        fixed_fee = st.number_input('固定费用', min_value=0.0, value=0.0, format='%')
-        exchange_rate = st.number_input('汇率', min_value=0.0, value=0.0, format='%')
+        other_fee = st.number_input('其他费用', min_value=0.0, value=0.0)
+        fixed_fee = st.number_input('固定费用', min_value=0.0, value=0.0)
+        exchange_rate = st.number_input('汇率', min_value=0.0, value=0.0)
     with col2:
         promotion_discount = st.number_input('促销折扣%', min_value=0.0, value=0.0, format='%')
         category_commission = st.number_input('类目佣金%', min_value=0.0, value=0.0, format='%')
