@@ -12,11 +12,10 @@ categoryCommission = 5 # 产品佣金,百分数
 exchangeLoss = 2     # 汇率损失,百分数
 goodsLoss = 3        # 货损,百分数
 
-def ozonPricing(purchaseCost: float) -> (float, str):
+def ozonPricing(purchaseCost: float) -> (float, str):  
      """Ozon定价计算函数"""
-     if not isinstance(purchaseCost, float) or purchaseCost <= 0:  
-          st.warning('请输入正确的数值类型参数!')
-          return  
+     # 参数类型检查......
+     #  function body......
 
      # 采购成本加成计算  
      costPlus = purchaseCost * (1 + purchaseMargin/100)   
@@ -38,8 +37,11 @@ def ozonPricing(purchaseCost: float) -> (float, str):
 # Streamlit实现可视化 
 st.title('Ozon定价计算工具')  
 
-# 获取用户输入
-purchaseCost = st.number_input('请输入采购成本', min_value=1, max_value=1000000, value=1) 
+
+# 获取用户输入并转换为float类型   
+purchaseCost = st.number_input('请输入采购成本', min_value=1, max_value=1000000,  
+                               value=1, step=1.0, format='%f')  
+
 
 # 调用函数进行计算
 if purchaseCost: 
