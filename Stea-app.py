@@ -54,7 +54,7 @@ with st.form(key='my_form'):
     col1, col2 = st.columns(2)
     with col1:
         purchase_cost = st.number_input('采购成本', help='请输入商品采购成本价格')
-        purchase_margin = st.number_input('采购成本利润率%', 0, 100, 0.0, '%')
+        purchase_margin = st.number_input('采购成本利润率%', 1, 100, 0.0, '%')
         logistics_fee = st.number_input('物流费用', 0.0, None, 0.0, '%')
         other_fee = st.number_input('其他费用', 0.0, None, 0.0, '%')
         fixed_fee = st.number_input('固定费用', 0.0, None, 0.0, '%')
