@@ -19,18 +19,21 @@ def ozonPricing(purchaseCost: float):
 # Streamlit实现可视化
 st.title('Ozon定价计算工具')
 
-# 获取用户输入并转换为float类型  
-purchaseCost = st.number_input('请输入采购成本', min_value=0.0, max_value=1000000,  
-                               step=0.01, format='%f')  
+# 获取用户输入并转换为float类型
+purchaseCost = st.number_input('请输入采购成本', min_value=0.0, max_value=1000000, 
+                               step=0.01, format='%f')
 
-# 调用函数进行计算 
+# Streamlit实现可视化 
+st.title('Ozon定价计算工具')  
+
+
+# 调用函数进行计算
 if purchaseCost:  
      price, formula = ozonPricing(purchaseCost)  
      st.write(f'最终定价: ¥{price}')  
      st.latex(formula)  
 else:  
-     st.warning('请输入采购成本!')  
-
+     st.warning('请输入采购成本!') 
 
 
 # Streamlit实现可视化 
