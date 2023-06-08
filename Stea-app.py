@@ -60,10 +60,10 @@ with st.form(key='my_form'):
         fixed_fee = st.number_input('固定费用', min_value=0.0, value=0.0)
         exchange_rate = st.number_input('汇率', min_value=0.0, value=0.0)
     with col2:
-        promotion_discount = st.number_input('促销折扣%', min_value=0.0, value=0.0, format='%')
-        category_commission = st.number_input('类目佣金%', min_value=0.0, value=0.0, format='%')
-        exchange_loss = st.number_input('汇率损失%', min_value=0.0, value=0.0, format='%')
-        goods_loss = st.number_input('货物损失%', min_value=0.0, value=0.0, format='%')
+        promotion_discount = st.number_input('促销折扣%', min_value=0.0, value=0.0)
+        category_commission = st.number_input('类目佣金%', min_value=0.0, value=0.0)
+        exchange_loss = st.number_input('汇率损失%', min_value=0.0, value=0.0)
+        goods_loss = st.number_input('货物损失%', min_value=0.0, value=0.0)
 
     submitted = st.form_submit_button('添加')
     if submitted:
