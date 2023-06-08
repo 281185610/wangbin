@@ -39,12 +39,12 @@ st.latex(r'''
 
 # 显示输入表格
 st.write('**请输入商品信息:**')
-df = pd.DataFrame(columns=['采购成本', '采购成本利润率%', '物流费用', '其他费用', '固定费用', '汇率',
+df = pd.DataFrame(columns=['序号', '采购成本', '采购成本利润率%', '物流费用', '其他费用', '固定费用', '汇率',
                            '促销折扣%', '类目佣金%', '汇率损失%', '货物损失%'])
 st.write(df)
 
 # 显示计算结果表格
-result_df = pd.DataFrame(columns=['采购成本', '最终定价'])
+result_df = pd.DataFrame(columns=['序号', '采购成本', '最终定价'])
 st.write('**计算结果:**')
 st.write(result_df)
 
@@ -68,7 +68,8 @@ with st.form(key='my_form'):
 
     submitted = st.form_submit_button('添加')
     if submitted:
-        row = {'采购成本': purchase_cost,
+        row = {'序号': len(df) + 1,
+               '采购成本': purchase_cost,
                '采购成本利润率%': purchase_margin,
                '物流费用': logistics_fee,
                '其他费用': other_fee,
@@ -88,7 +89,7 @@ if not df.empty:
                              row['物流费用'], row['其他费用'], row['固定费用'],
                              row['汇率'], row['促销折扣%'], row['类目佣金%'],
                              row['汇率损失%'], row['货物损失%'])
-        result_row = {'采购成本': row['采购成本'], '最终定价': price}
+        result_row = {'序号': row['序号'], '采购成本': row['采购成本'], '最终定价': price}
         result_df = result_df.append(result_row, ignore_index=True)
 
     st.write('**计算结果:**')
