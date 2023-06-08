@@ -81,12 +81,13 @@ with st.form(key='my_form'):
         st.table(df)
 
 # 计算最终定价并添加到结果表格中
+# 计算最终定价并添加到结果表格中
 if not df.empty:
     for i, row in df.iterrows():
-        result_df = pd.DataFraane(row['采购成本'], row['采购成本利润率%'],
-                             row['物流费用'], row['其他费用'], row['固定费用'],
-                             row['汇率'], row['促销折扣%'], row['类目佣金%'],
-                             row['汇率损失%'], row['货物损失%'])
+        result_df = pd.DataFrame(row['采购成本'], row['采购成本利润率%'],  
+                               row['物流费用'], row['其他费用'], row['固定费用'],
+                               row['汇率'], row['促销折扣%'], row['类目佣金%'],
+                               row['汇率损失%'], row['货物损失%'])
         result_row = {'采购成本': row['采购成本'], '最终定价': price}
         result_df = result_df.append(result_row, ignore_index=True)
 
