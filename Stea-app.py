@@ -18,9 +18,9 @@ def ozonPricing(purchaseCost: float):
 # Streamlit实现可视化
 st.title('Ozon定价计算工具')  
 
-# 获取用户输入并转换为float类型
-purchaseCost = st.number_input('请输入采购成本', min_value=0.0, max_value=1000000,  
-                               step=0.01, format='%f')   
+# 获取用户输入并转换为float类型  
+purchaseCost_input = input('请输入采购成本:')
+purchaseCost = float(purchaseCost_input)
 
 # 调用函数进行计算
 if purchaseCost:  
