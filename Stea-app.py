@@ -4,19 +4,19 @@ def ozon_pricing(purchase_cost):
         if not isinstance(purchase_cost, (int, float)):
                  st.warning('请输入数值类型的参数!')
                  return
-    # 其他参数也增加类型检查......                 
-        
+    # 其他参数也增加类型检查......         
+
 # 定义参数初值
 purchase_cost = 15          
 
 # 调用函数进行计算
 if isinstance(purchase_cost, (int, float)):
-            cost_plus = purchase_cost * (1 + purchase_margin/100)  
-    
-        # 采购成本加成计算  
+            cost_plus = purchase_cost * (1 + purchase_margin/100)   
+  
+        # 采购成本加成计算        
+          total_cost = cost_plus + logistics_fee + other_fee + fixed_fee  
  
     # 其他费用计算
-    total_cost = cost_plus + logistics_fee + other_fee + fixed_fee
 
     # 汇率调整
     total_cost = total_cost * exchange_rate
