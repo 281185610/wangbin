@@ -11,8 +11,7 @@ purchase_cost = 15
 
 if  isinstance(purchase_cost, (int, float)):
             cost_plus = purchase_cost * (1 + purchase_margin/100)   
-  
-           total_cost = cost_plus + logistics_fee + other_fee + fixed_fee    
+ total_cost = cost_plus + logistics_fee + other_fee + fixed_fee          
  
         # 采购成本加成计算        
  
@@ -44,4 +43,4 @@ if submitted:
         st.write(f'最终定价: ¥{price}')
         st.latex(formula)  
     else:
-        st.warning('请输入数值类型的参数!') 
+        st.warning('请输入数值类型的参数!')
