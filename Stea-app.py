@@ -27,7 +27,7 @@ purchaseCost = st.number_input('请输入采购成本', min_value=0.0, max_value
 if purchaseCost:  
      price, formula = ozonPricing(purchaseCost)  
      st.write(f'最终定价: ¥{price}')  
-     st.latex(formula)
+     st.latex(formula)  
 else:  
      st.warning('请输入采购成本!')  
 
