@@ -1,0 +1,44 @@
+import streamlit as st
+
+# 产品数量
+num_products = st.number_input("请输入产品数量", min_value=1, value=1)
+
+# 采购成本
+cost_price = st.number_input("请输入采购成本", min_value=0.0, value=0.0)
+
+# 采购成本利润率
+profit_margin = st.slider("请选择采购成本利润率", min_value=0, max_value=100, value=20, step=5)
+
+# 物流费用
+shipping_cost = st.number_input("请输入物流费用", min_value=0.0, value=0.0)
+
+# 其他费用
+other_cost = st.number_input("请输入其他费用", min_value=0.0, value=0.0)
+
+# 固定金额
+fixed_amount = st.number_input("请输入固定金额", min_value=0.0, value=0.0)
+
+# 汇率
+exchange_rate = st.number_input("请输入汇率", min_value=0.0, value=1.0)
+
+# 促销折扣
+discount = st.slider("请选择促销折扣", min_value=0, max_value=100, value=0, step=5)
+
+# 类目佣金
+commission = st.slider("请选择类目佣金", min_value=0, max_value=100, value=10, step=5)
+
+# 汇率损失
+exchange_loss = st.slider("请选择汇率损失", min_value=0, max_value=100, value=1, step=1)
+
+# 货物损失
+goods_loss = st.slider("请选择货物损失", min_value=0, max_value=100, value=1, step=1)
+
+# 计算按钮，点击后进行计算
+if st.button("计算"):
+    # 计算售价
+    sale_price = (cost_price * (1 + profit_margin / 100) + shipping_cost + other_cost + fixed_amount) * exchange_rate / ((1 - discount / 100) * (1 - commission / 100) * (1 - exchange_loss / 100) * (1 - goods_loss / 100))
+    # 计算利润
+    profit = sale_price - shipping_cost - cost_price - (sale_price * commission / 100) - other_cost - fixed_amount - (sale_price * commission / 100 * 0.06)
+    # 显示售价和利润
+    st.write(f"售价为：{sale_price:.2f}")
+    st.write(f"利润为：{profit:.2f}")
